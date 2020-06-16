@@ -1,0 +1,37 @@
+#Rolling average calculation on streaming speed metric
+
+"""
+id: car_id
+speed: speed of car in kmph
+"""
+#creating a stream on the speed topic
+CREATE STREAM speed (id VARCHAR, speed INT) WITH (KAFKA_TOPIC= 'speed', VALUE_FORMAT= 'JSON');
+
+#create a aggregate query on the speed stream, the result will be feed into a topic
+CREATE TABLE AVGSPEED WITH (KAFKA_TOPIC='AVGSPEED', PARTITIONS=2, REPLICAS=2) AS SELECT
+  SPEED.ID ID,
+  AVG(SPEED.SPEED) AVG_SPEED
+FROM SPEED SPEED
+WINDOW HOPPING ( SIZE 5 SECONDS , ADVANCE BY 2 SECONDS )
+GROUP BY SPEED.ID
+EMIT CHANGES;
+
+
+
+"""
+id: car_id
+m_lapDistance: current lap distance in metres
+m_currentLapNum: current lap_num
+"""
+
+#creating a stream on the lap topic
+CREATE STREAM LAP (id VARCHAR, lapdist INT, currlap INT) WITH (KAFKA_TOPIC= 'lap', VALUE_FORMAT= 'JSON');
+
+#create a aggregate of running total of the lap distance on TOTDISTANCE stream
+CREATE TABLE TOTDISTANCE WITH (KAFKA_TOPIC='TOTDISTANCE', PARTITIONS=2, REPLICAS=2) AS SELECT
+  LAP.ID ID,
+  SUM(LAP.lapdist) TOTDISTANCE
+FROM LAP
+WHERE LAP.currlap != 1
+GROUP BY LAP.ID
+EMIT CHANGES;
