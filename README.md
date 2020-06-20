@@ -104,7 +104,8 @@ python3 bash_scripts/consumer_run.sh
 ```
 
 ### License
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT License](LICENSE) <br />
+Copyright (c) 2020 Hemanth Devarapati
 
 
 
