@@ -1,6 +1,7 @@
 """
 @Project: Real time stream processing of formula 1 racing car telemetry
 @author: hemanth
+@info: Consumers bytes from lap topic and ingest data into influxdb
 """
 import sys
 import json
@@ -17,20 +18,20 @@ def consume():
         'group.id': 'influxgroup_lap',
         'auto.offset.reset': 'latest',
         'enable.auto.commit': True,
-        'auto.commit.interval.ms': 100
+        'fetch.min.bytes': 1000000
     })
 
     c.subscribe(['lap'])
 
     try:
         while True:
-            #print('Waiting for message..')
-            msg = c.poll(0)
+            client_write_start_time = time.perf_counter()
+            msg = c.poll(0.1)
             if msg is None:
                 continue
             if msg.error():
                 print("Consumer error: {}".format(msg.error()))
-                continue#print('Received message: {}'.format(msg.value().decode('utf-8')))
+                print('Received message: {}'.format(msg.value().decode('utf-8')))
             data = json.loads(msg.value())
             json_body = [
             {
@@ -39,9 +40,8 @@ def consume():
                 "fields": data
             }
             ]
-            client_write_start_time = time.perf_counter()
 
-            client.write_points(json_body)
+            client.write_points(json_body) #writes data into influxdb
 
             client_write_end_time = time.perf_counter()
             print("Client Library Write: {time}s".format(time=client_write_end_time - client_write_start_time))
