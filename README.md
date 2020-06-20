@@ -1,4 +1,5 @@
 # The-DataFormula
+#### A resilient real-time streaming platform for formula 1 telemetry data
 [Presentation Slides](https://docs.google.com/presentation/d/1iVNSijN6hWdmantrVPCrFRSPjSPBr-5AZsMWYGz8bFY)
 
 ### Problem
@@ -14,7 +15,9 @@ Kafka producers are streaming this captured data for two cars of 50 sensors at a
 ![data](docs/data.png) <br />
 
 ### Architecture
+- Simplified the architecture for streaming from Kafka and spark to Kafka streams
 ![architecture](docs/pipeline.png) <br />
+![sparkvsstreams](docs/spark.png) <br />
 
 ***Stream processing***: real-time telemetry observations are streamed by Kafka into Kafka Streams, which handles two tasks: 
 
