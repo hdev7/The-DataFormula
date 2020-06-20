@@ -18,9 +18,9 @@ Kafka producers are streaming this captured data for two cars of 50 sensors at a
 
 ***Stream processing***: real-time telemetry observations are streamed by Kafka into Kafka Streams, which handles two tasks: 
 
- 1.Hopping window average of speed, it advances by 2s and has a window size of 5s
+ - Hopping window average of speed, it advances by 2s and has a window size of 5s
  
- 2.Running total of the lap distance <br />
+ - Running total of the lap distance <br />
  
  ![processing](docs/hopping.png)
  
