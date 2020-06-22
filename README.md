@@ -108,7 +108,7 @@ python3 bash_scripts/consumer_run.sh
 
 ### License
 [MIT License](LICENSE) <br />
-Copyright (c) 2020 Hemanth Devarapati <hemanthsaid7@gmail.com>
+Copyright (c) 2020 Hemanth Devarapati (<hemanthsaid7@gmail.com>)
 
 
 
