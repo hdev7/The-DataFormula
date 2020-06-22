@@ -1,4 +1,7 @@
 # The-DataFormula
+![](https://img.shields.io/badge/python-3.6-brightgreen) ![](https://img.shields.io/badge/influxdb-1.7.7-yellowgreen)
+![](https://img.shields.io/badge/grafana-7.0.3-orange)
+![](https://img.shields.io/badge/confluent--kafka-1.4.2-yellow) ![](https://img.shields.io/badge/license-MIT-lightgrey)
 #### A resilient real-time streaming platform for formula 1 telemetry data
 [Presentation Slides](https://docs.google.com/presentation/d/1iVNSijN6hWdmantrVPCrFRSPjSPBr-5AZsMWYGz8bFY)
 
