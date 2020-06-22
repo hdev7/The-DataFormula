@@ -9,11 +9,12 @@ import csv
 from json import dumps
 import time
 from confluent_kafka.admin import AdminClient, NewTopic
+import config
 
 class Producer(object):
 
     def __init__(self):
-        self.producer = confluent_kafka.Producer({'bootstrap.servers': 'ip-172-31-87-92.ec2.internal:9092,ip-172-31-92-117.ec2.internal:9092,ip-172-31-93-248.ec2.internal:9092',
+        self.producer = confluent_kafka.Producer({'bootstrap.servers': config.kafka_servers,
                                                   'linger.ms':1, 'batch.num.messages':5000, 'acks':2, 'compression.type': None})
         self.kafka_topic = 'telemetry'
 

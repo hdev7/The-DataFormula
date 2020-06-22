@@ -8,13 +8,14 @@ import json
 from confluent_kafka import Consumer, KafkaError
 from influxdb import InfluxDBClient
 import time
+import config
 
 def consume():
 
-    client = InfluxDBClient(host='ip-172-31-95-138.ec2.internal', port=8086, username='admin', password='admin', database='test')
+    client = InfluxDBClient(host=config.influxdb_servers, port=config.influxdb_port, username=config.infuxdb_user, password=config.influxdb_pass, database=config.influxdb_database)
 
     c = Consumer({
-        'bootstrap.servers': 'ip-172-31-87-92.ec2.internal:9092,ip-172-31-92-117.ec2.internal:9092,ip-172-31-93-248.ec2.internal:9092',
+        'bootstrap.servers': config.kafka_servers,
         'group.id': 'influxgroup_lap',
         'auto.offset.reset': 'latest',
         'enable.auto.commit': True,
