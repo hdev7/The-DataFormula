@@ -51,7 +51,7 @@ Confluent-kakfa has the best throughput and scales linearly <br />
 
 #### SET UP CLUSTER:
 - (3 nodes) Kafka-Cluster, instance type: m4.xlarge
-- (1 node) Influxdb , instance type: i3.large
+- (1 node) Influxdb , instance type: i3.large   (create consumer groups and add more nodes to avoid consumer lag, depends on the use case)
 - (1 node) Jump host/Producer, instance type: t2.medium
 - (1 node) Grafana, instance type: m4.large
 
